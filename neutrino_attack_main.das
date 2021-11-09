@@ -33,10 +33,8 @@ var
     teamColors: array<uint>
     randomSeed = random_seed(0)
     nextGeneration: float
-    physStepTime: float
     frames: int
     framesCountStart: float
-    isCollideOther: bool
     aiControllers: array<AiController>
     planetsCount: int
     gameState: int
@@ -226,7 +224,7 @@ def update_unit(eid: EntityId; var pos: float2&; spd: float; target: float2; tea
     pos += dt * velocity
     let unitPos = pos
     let unitTeam = team
-    isCollideOther = find_query <| $ [REQUIRE_NOT(unitsGeneratePerTick)](eid: EntityId; pos: float2; team: int)
+    let isCollideOther = find_query <| $ [REQUIRE_NOT(unitsGeneratePerTick)](eid: EntityId; pos: float2; team: int)
         if unitTeam != team && is_equal(pos, unitPos, 6f)
             delete_entity(eid)
             return true
@@ -267,7 +265,6 @@ def draw_planet(pos: float2; health, maxHealth, team, attackingTeam: int; radius
 def initialize(is_hard_reload: bool)
     set_window_title("Neutrino Attack")
     randomize_seed(randomSeed)
-    physStepTime = 0.33
     framesCountStart = 0.1
 
     if is_hard_reload
