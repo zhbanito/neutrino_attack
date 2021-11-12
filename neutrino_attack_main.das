@@ -138,7 +138,7 @@ def generate_units(var ug: UnitsGenerator)
             make_unit(pos + float2(randomVelocity.x, randomVelocity.y) * radius * 0.3, pos + float2(randomVelocity.x, randomVelocity.y) * radius, 1.5, team)
 
 
-def fill_planet(planet_id: int; unit_eid: EntityId#; unit_team: int)
+def fill_planet(planet_id: int; unit_eid: EntityId; unit_team: int)
     find_query() <| $ (var team, attackingTeam, health: int&; id, maxHealth: int; var color: uint&)
         if id == planet_id
             if team == NO_TEAM
